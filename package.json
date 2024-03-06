@@ -1,18 +1,19 @@
 {
   "name": "JATE",
   "version": "1.0.0",
-  "description": "",
+  "description": "Just Another Text Editor",
   "main": "server.js",
   "scripts": {
-    "start:dev": "",
-    "start": "",
-    "server": "",
-    "build": "",
-    "install": "",
-    "client": ""
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "server": "node server.js",
+    "start:prod": "node server.js",
+    "build": "webpack --config webpack.config.js",
+    "install": "cd client && npm install",
+    "client": "webpack-dev-server --port 3000 --content-base client --hot"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["pwa", "text-editor", "offline"],
+  "author": "Diego Araujo ",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
@@ -20,6 +21,9 @@
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.3"
   }
 }
