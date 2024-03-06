@@ -1,29 +1,26 @@
 {
   "name": "JATE",
   "version": "1.0.0",
-  "description": "Just Another Text Editor",
+  "description": "",
   "main": "server.js",
   "scripts": {
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "server": "node server.js",
-    "start:prod": "node server.js",
-    "build": "webpack --config webpack.config.js",
-    "install": "cd client && npm install",
-    "client": "webpack-dev-server --port 3000 --content-base client --hot"
+    "start:dev": "concurrently \"cd server && npm run server\" \"cd client && npm run dev\"",
+    "start": "npm run build && cd server && node server.js",
+    "server": "cd server nodemon server.js --ignore client",
+    "build": "cd client && npm run build",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "client": "cd client && npm start"
   },
-  "keywords": ["pwa", "text-editor", "offline"],
-  "author": "Diego Araujo ",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "webpack": "^5.76.2"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
-    "nodemon": "^2.0.4",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.3"
+    "nodemon": "^2.0.4"
   }
 }

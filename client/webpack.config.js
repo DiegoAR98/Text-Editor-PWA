@@ -19,9 +19,10 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './src/index.html',
-        title: 'JATE'
+        template: './index.html',
+        title: 'Contact Cards'
       }),
+      
       new InjectManifest({
         swSrc: './src-sw.js',
         swDest: 'service-worker.js'

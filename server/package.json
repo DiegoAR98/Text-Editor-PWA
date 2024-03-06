@@ -4,15 +4,19 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "server": "nodemon server.js --ignore client"
+      "start": "node server.js",
+      "server": "nodemon server.js --ignore client",
+      "build": "cd client && npm install && npm run build",
+      "postinstall": "npm run build"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "express": "^4.17.1"
+      "express": "^4.17.1"
     },
     "devDependencies": {
-        "nodemon": "^2.0.4"
+      "nodemon": "^2.0.4"
     }
-}
+  }
+  
