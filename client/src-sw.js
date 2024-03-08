@@ -28,20 +28,16 @@ registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // TODO: Implement asset caching
 // Define the match callback function outside the registerRoute call
-function matchCallback({ request }) {
-  // Array of destinations to be cached
-  const destinations = ['style', 'script', 'worker'];
-  return destinations.includes(request.destination);
-}
+registerRoute(
+  ({ request }) => ['style', 'script', 'worker'].includes(request.destination),
+  new StaleWhileRevalidate({
+    cacheName: 'asset-cache',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  })
 
-// Define the caching strategy and its configuration outside the registerRoute call
-const staleWhileRevalidateStrategy = new StaleWhileRevalidate({
-  cacheName: 'asset-cache',
-  plugins: [
-    // Plugin to cache responses with specific status codes
-    new CacheableResponsePlugin({ statuses: [0, 200] }),
-  ],
-});
 
-// Register the route using the defined match callback and caching strategy
-registerRoute(matchCallback, staleWhileRevalidateStrategy);
+);
